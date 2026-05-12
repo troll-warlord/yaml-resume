@@ -33,11 +33,11 @@ useHead({
   <!-- Page shell — grey on screen, transparent in print -->
   <div class="min-h-screen bg-gray-100 py-8 px-4 print:bg-transparent print:p-0 print:m-0">
     <!-- A4 card -->
-    <div id="resume" class="a4-card bg-background mx-auto px-10 py-10 text-text-main">
+    <div id="resume" class="a4-card bg-background mx-auto px-8 py-8 text-text-main">
       <header class="mb-section-gap">
         <div class="flex items-start justify-between gap-6">
           <div>
-            <h1 class="text-4xl font-bold leading-tight mb-1 text-text-main">{{ basics.name }}</h1>
+            <h1 class="text-3xl font-bold leading-tight mb-1 text-text-main">{{ basics.name }}</h1>
             <p class="text-lg font-medium text-primary mb-3">{{ basics.label }}</p>
             <p class="text-sm text-text-muted leading-relaxed max-w-sm">{{ basics.summary }}</p>
           </div>
@@ -51,7 +51,7 @@ useHead({
               :key="link.network"
               reverse
               :icon="link.icon"
-              :label="link.network"
+              :label="link.username ?? link.network"
               :href="link.url"
               :external="true"
             />

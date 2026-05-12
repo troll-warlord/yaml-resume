@@ -13,9 +13,11 @@ basics:
     that delight users.
   social:
     - network: LinkedIn
+      username: alexjohnson
       url: https://linkedin.com/in/alexjohnson
       icon: linkedin
     - network: GitHub
+      username: alexjohnson
       url: https://github.com/alexjohnson
       icon: github
     - network: Portfolio

@@ -2,6 +2,7 @@
 
 export interface SocialLink {
   network: string
+  username?: string
   url: string
   icon: string
 }

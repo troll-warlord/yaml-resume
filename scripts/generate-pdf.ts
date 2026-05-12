@@ -44,14 +44,14 @@ async function generatePdf() {
   const browser = await chromium.launch()
   const page = await browser.newPage()
 
-  await page.emulateMedia({ media: 'screen' })
+  await page.emulateMedia({ media: 'print' })
   await page.goto(SITE_URL, { waitUntil: 'networkidle' })
   await page.waitForFunction('document.fonts.ready')
 
   const pdfBytes = await page.pdf({
     format: 'A4',
     printBackground: true,
-    margin: { top: '12mm', bottom: '12mm', left: '14mm', right: '14mm' },
+    margin: { top: '0', bottom: '0', left: '0', right: '0' },
   })
 
   await browser.close()
