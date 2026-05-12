@@ -39,7 +39,7 @@ useHead({
           <div>
             <h1 class="text-3xl font-bold leading-tight mb-1 text-text-main">{{ basics.name }}</h1>
             <p class="text-lg font-medium text-primary mb-3">{{ basics.label }}</p>
-            <p class="text-sm text-text-muted leading-relaxed max-w-sm">{{ basics.summary }}</p>
+            <p class="text-sm text-text-muted leading-relaxed max-w-lg">{{ basics.summary }}</p>
           </div>
 
           <div class="flex flex-col gap-1.5 items-end shrink-0">
