@@ -29,7 +29,7 @@ function asProjects(items: ResumeSection['items']): ProjectItem[] {
         :key="group.group"
         class="flex items-start gap-4 py-2.5"
       >
-        <span class="w-28 shrink-0 text-xs font-semibold uppercase tracking-widest text-text-muted pt-0.5">
+        <span class="w-xs shrink-0 text-xs font-semibold uppercase tracking-widest text-text-muted pt-0.5">
           {{ group.group }}
         </span>
         <div class="flex flex-wrap gap-1.5">

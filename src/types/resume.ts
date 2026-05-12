@@ -57,6 +57,7 @@ export interface ResumeConfig {
   dateLocale?: string
   accentColor?: string
   pageSize?: string
+  fontSize?: number
 }
 
 export interface ResumeSection {
@@ -75,8 +76,6 @@ export interface ResumeData {
   sections: ResumeSection[]
   config?: ResumeConfig
 }
-
-// ── Root ──────────────────────────────────────────────────────────────────────
 
 export interface ResumeData {
   basics: Basics

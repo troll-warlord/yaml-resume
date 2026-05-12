@@ -2,6 +2,7 @@ import { chromium } from 'playwright'
 import { PDFDocument } from 'pdf-lib'
 import { readFileSync, writeFileSync } from 'fs'
 import { resolve } from 'path'
+import { spawn } from 'child_process'
 import yaml from 'js-yaml'
 
 const SITE_URL = process.env.SITE_URL ?? 'http://localhost:4173'
@@ -38,29 +39,71 @@ async function injectMetadata(pdfBytes: Uint8Array, data: ResumeYaml): Promise<U
   return doc.save()
 }
 
-async function generatePdf() {
-  console.log(`Generating PDF from ${SITE_URL} …`)
-
-  const browser = await chromium.launch()
-  const page = await browser.newPage()
-
-  await page.emulateMedia({ media: 'print' })
-  await page.goto(SITE_URL, { waitUntil: 'networkidle' })
-  await page.waitForFunction('document.fonts.ready')
-
-  const pdfBytes = await page.pdf({
-    format: 'A4',
-    printBackground: true,
-    margin: { top: '0', bottom: '0', left: '0', right: '0' },
+function startServer() {
+  const isWin = process.platform === 'win32'
+  const server = spawn(isWin ? 'npx.cmd' : 'npx', ['vite', 'preview'], {
+    stdio: 'ignore',
+    detached: !isWin,
   })
+  return server
+}
 
-  await browser.close()
+function waitForServer(url: string, retries = 30): Promise<void> {
+  return new Promise((resolve, reject) => {
+    let attempts = 0
+    const interval = setInterval(async () => {
+      try {
+        const res = await fetch(url)
+        if (res.ok || res.status < 500) {
+          clearInterval(interval)
+          resolve()
+        }
+      } catch {
+        if (++attempts >= retries) {
+          clearInterval(interval)
+          reject(new Error(`Server at ${url} did not start in time`))
+        }
+      }
+    }, 1000)
+  })
+}
 
-  const resumeData = yaml.load(readFileSync(YAML_PATH, 'utf8')) as ResumeYaml
-  const finalBytes = await injectMetadata(pdfBytes, resumeData)
-  writeFileSync(OUT_PATH, finalBytes)
+async function generatePdf() {
+  const managedServer = !process.env.SITE_URL
+  const server = managedServer ? startServer() : null
 
-  console.log(`PDF saved to ${OUT_PATH}`)
+  try {
+    if (managedServer) {
+      console.log('Starting preview server…')
+      await waitForServer(SITE_URL)
+    }
+
+    console.log(`Generating PDF from ${SITE_URL} …`)
+    const browser = await chromium.launch()
+    const page = await browser.newPage()
+
+    await page.emulateMedia({ media: 'print' })
+    await page.goto(SITE_URL, { waitUntil: 'load' })
+    await page.waitForFunction('document.fonts.ready')
+
+    const pdfBytes = await page.pdf({
+      format: 'A4',
+      printBackground: true,
+      margin: { top: '0', bottom: '0', left: '0', right: '0' },
+    })
+
+    await browser.close()
+
+    const resumeData = yaml.load(readFileSync(YAML_PATH, 'utf8')) as ResumeYaml
+    const finalBytes = await injectMetadata(pdfBytes, resumeData)
+    writeFileSync(OUT_PATH, finalBytes)
+
+    console.log(`PDF saved to ${OUT_PATH}`)
+  } finally {
+    if (server) {
+      server.kill()
+    }
+  }
 }
 
 generatePdf().catch((err) => {

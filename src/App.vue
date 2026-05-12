@@ -16,6 +16,9 @@ onMounted(() => {
   if (config?.accentColor) {
     document.documentElement.style.setProperty('--color-primary', config.accentColor)
   }
+  if (config?.fontSize) {
+    document.documentElement.style.fontSize = `${config.fontSize}px`
+  }
 })
 
 useHead({
@@ -39,10 +42,10 @@ useHead({
           <div>
             <h1 class="text-3xl font-bold leading-tight mb-1 text-text-main">{{ basics.name }}</h1>
             <p class="text-lg font-medium text-primary mb-3">{{ basics.label }}</p>
-            <p class="text-sm text-text-muted leading-relaxed max-w-lg">{{ basics.summary }}</p>
+            <p class="text-sm text-text-muted leading-relaxed">{{ basics.summary }}</p>
           </div>
 
-          <div class="flex flex-col gap-1.5 items-end shrink-0">
+          <div class="flex flex-col gap-1.5 items-end shrink-0 ml-4">
             <ContactItem reverse icon="mail" :label="basics.email" :href="`mailto:${basics.email}`" />
             <ContactItem reverse icon="phone" :label="basics.phone" :href="`tel:${basics.phone}`" />
             <ContactItem reverse icon="map-pin" :label="`${basics.location.city}, ${basics.location.region}`" />
@@ -96,6 +99,5 @@ useHead({
   width: 210mm;
   min-height: 297mm;
   max-width: 210mm;
-  font-size: 10px;
 }
 </style>

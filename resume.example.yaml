@@ -31,6 +31,7 @@ config:
   dateLocale: 'en-US'
   accentColor: '#2563eb'
   pageSize: 'A4'
+  fontSize: 10
 
 sections:
 
