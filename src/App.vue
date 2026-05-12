@@ -96,5 +96,6 @@ useHead({
   width: 210mm;
   min-height: 297mm;
   max-width: 210mm;
+  font-size: 14px;
 }
 </style>
