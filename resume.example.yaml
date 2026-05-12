@@ -1,0 +1,139 @@
+basics:
+  name: Alex Johnson
+  label: Senior Full-Stack Engineer
+  email: alex.johnson@email.com
+  phone: +1 (555) 123-4567
+  location:
+    city: San Francisco
+    region: CA
+    country: USA
+  summary: >
+    Passionate engineer with 8+ years building scalable web applications.
+    Focused on developer experience, clean architecture, and shipping products
+    that delight users.
+  social:
+    - network: LinkedIn
+      url: https://linkedin.com/in/alexjohnson
+      icon: linkedin
+    - network: GitHub
+      url: https://github.com/alexjohnson
+      icon: github
+    - network: Portfolio
+      url: https://alexjohnson.dev
+      icon: globe
+
+config:
+  showDuration: false
+  showLocation: true
+  bulletMarker: '>'
+  dateLocale: 'en-US'
+  accentColor: '#2563eb'
+  pageSize: 'A4'
+
+sections:
+
+  - id: summary
+    title: About Me
+    type: text
+    content: >
+      I thrive at the intersection of engineering and product. Outside of work I contribute
+      to open-source, write about software architecture on my blog, and enjoy hiking the
+      trails around the Bay Area.
+
+  - id: professional-summary
+    title: Professional Summary
+    type: list
+    bullets:
+      - 8+ years building scalable web applications across fintech, SaaS, and e-commerce domains
+      - Deep expertise in distributed systems, API design, and frontend architecture
+      - Proven track record of reducing infrastructure costs and improving developer productivity
+      - Strong communicator who bridges technical and business stakeholders effectively
+      - Active open-source contributor and technical writer
+
+  - id: experience
+    title: Experience
+    type: timeline
+    items:
+      - designation: Senior Software Engineer
+        organization: Acme Corp
+        location: San Francisco, CA
+        startDate: '2021-03'
+        endDate: null
+        current: true
+        bullets:
+          - Led migration from monolith to microservices, reducing deploy time by 60%
+          - Mentored a team of 5 engineers across 3 time zones
+          - Architected real-time notification system handling 1M+ events/day
+
+      - designation: Software Engineer
+        organization: Startup XYZ
+        location: Remote
+        startDate: '2018-06'
+        endDate: '2021-02'
+        current: false
+        bullets:
+          - Built and maintained 3 customer-facing React applications
+          - Reduced API latency by 40% through query optimization and caching
+          - Implemented CI/CD pipelines with zero-downtime deployments
+
+      - designation: Junior Developer
+        organization: Digital Agency Co
+        location: Austin, TX
+        startDate: '2016-08'
+        endDate: '2018-05'
+        current: false
+        bullets:
+          - Developed client websites and web apps using Vue.js and Node.js
+          - Collaborated directly with designers to implement pixel-perfect UIs
+
+  - id: certifications
+    title: Certifications
+    type: timeline
+    flipHierarchy: true
+    breakInside: true
+    items:
+      - designation: Certified Kubernetes Application Developer (CKAD)
+        organization: Cloud Native Computing Foundation
+        url: https://www.credly.com/badges/example-ckad
+        startDate: '2023-04'
+        endDate: '2026-04'
+        current: false
+
+  - id: education
+    title: Education
+    type: timeline
+    breakInside: true
+    items:
+      - designation: B.S. Computer Science
+        organization: University of Texas at Austin
+        location: Austin, TX
+        startDate: '2012-09'
+        endDate: '2016-05'
+        current: false
+
+  - id: skills
+    title: Skills
+    type: grid
+    items:
+      - group: Languages
+        tags: [TypeScript, JavaScript, Python, Go, SQL]
+      - group: Frontend
+        tags: [Vue 3, Nuxt, React, Tailwind CSS, Vite]
+      - group: Backend
+        tags: [Node.js, Express, FastAPI, PostgreSQL, Redis]
+      - group: DevOps & Cloud
+        tags: [Docker, Kubernetes, AWS, GitHub Actions, Terraform]
+
+  - id: projects
+    title: Projects
+    type: grid
+    items:
+      - title: OpenMetrics Dashboard
+        url: https://github.com/alexjohnson/openmetrics
+        description: Open-source real-time metrics dashboard built with Nuxt 3, ClickHouse, and D3.js
+        tags: [Nuxt, ClickHouse, D3.js, Open Source]
+
+      - title: yaml-resume
+        url: https://github.com/you/yaml-resume
+        description: YAML-driven resume website with PDF export — the very site you are reading
+        tags: [Vue 3, Vite, Tailwind, YAML, PDF]
