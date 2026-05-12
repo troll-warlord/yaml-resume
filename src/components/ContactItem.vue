@@ -22,7 +22,9 @@ withDefaults(
       :target="external ? '_blank' : undefined"
       :rel="external ? 'noopener noreferrer' : undefined"
       class="text-text-muted hover:text-primary transition-colors"
-    >{{ label }}</a>
+    >
+      {{ label }}
+    </a>
     <span v-else>{{ label }}</span>
   </div>
 </template>

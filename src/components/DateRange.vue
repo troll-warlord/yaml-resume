@@ -32,12 +32,8 @@ function duration(start: string, end: string | null | undefined): string {
 }
 
 const displayStart = computed(() => fmt(props.startDate))
-const displayEnd = computed(() =>
-  props.current ? 'Present' : props.endDate ? fmt(props.endDate) : 'Present',
-)
-const displayDuration = computed(() =>
-  duration(props.startDate, props.current ? null : props.endDate),
-)
+const displayEnd = computed(() => (props.current ? 'Present' : props.endDate ? fmt(props.endDate) : 'Present'))
+const displayDuration = computed(() => duration(props.startDate, props.current ? null : props.endDate))
 </script>
 
 <template>

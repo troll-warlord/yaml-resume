@@ -31,7 +31,8 @@ config:
   dateLocale: 'en-US'
   accentColor: '#2563eb'
   pageSize: 'A4'
-  fontSize: 10
+  fontSize: 12
+  tagStyle: 'dot'
 
 sections:
 
@@ -55,7 +56,7 @@ sections:
 
   - id: experience
     title: Experience
-    type: timeline
+    type: experience
     items:
       - designation: Senior Software Engineer
         organization: Acme Corp
@@ -91,7 +92,7 @@ sections:
 
   - id: certifications
     title: Certifications
-    type: timeline
+    type: experience
     flipHierarchy: true
     breakInside: true
     items:
@@ -104,7 +105,7 @@ sections:
 
   - id: education
     title: Education
-    type: timeline
+    type: experience
     breakInside: true
     items:
       - designation: B.S. Computer Science
@@ -116,7 +117,7 @@ sections:
 
   - id: skills
     title: Skills
-    type: grid
+    type: skills
     items:
       - group: Languages
         tags: [TypeScript, JavaScript, Python, Go, SQL]
@@ -129,7 +130,7 @@ sections:
 
   - id: projects
     title: Projects
-    type: grid
+    type: projects
     items:
       - title: OpenMetrics Dashboard
         url: https://github.com/alexjohnson/openmetrics

@@ -25,7 +25,7 @@ export interface Basics {
 
 // Sections
 
-export type SectionType = 'timeline' | 'grid' | 'text' | 'list'
+export type SectionType = 'experience' | 'skills' | 'projects' | 'text' | 'list'
 
 export interface TimelineItem {
   designation: string
@@ -58,6 +58,7 @@ export interface ResumeConfig {
   accentColor?: string
   pageSize?: string
   fontSize?: number
+  tagStyle?: 'pill' | 'dot' | 'slash' | 'comma'
 }
 
 export interface ResumeSection {

@@ -48,7 +48,7 @@ useHead({
           <div class="flex flex-col gap-1.5 items-end shrink-0 ml-4">
             <ContactItem reverse icon="mail" :label="basics.email" :href="`mailto:${basics.email}`" />
             <ContactItem reverse icon="phone" :label="basics.phone" :href="`tel:${basics.phone}`" />
-            <ContactItem reverse icon="map-pin" :label="`${basics.location.city}, ${basics.location.region}`" />
+            <ContactItem reverse icon="map-pin" :label="`${basics.location.city}, ${basics.location.country}`" />
             <ContactItem
               v-for="link in basics.social"
               :key="link.network"
@@ -65,15 +65,8 @@ useHead({
       </header>
 
       <main>
-        <div
-          v-for="section in sections"
-          :key="section.id"
-          :class="{ 'print:break-inside-avoid': section.breakInside }"
-        >
-          <component
-            :is="sectionRegistry[section.type]"
-            :section="section"
-          />
+        <div v-for="section in sections" :key="section.id" :class="{ 'print:break-inside-avoid': section.breakInside }">
+          <component :is="sectionRegistry[section.type]" :section="section" />
         </div>
       </main>
     </div>
@@ -84,7 +77,17 @@ useHead({
       aria-label="Download resume as PDF"
       @click="downloadPdf"
     >
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <svg
+        width="15"
+        height="15"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
         <polyline points="7 10 12 15 17 10" />
         <line x1="12" y1="15" x2="12" y2="3" />
