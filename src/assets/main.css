@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;600;700&display=swap');
 @import 'tailwindcss';
 
 @theme {
@@ -10,7 +10,7 @@
   --color-surface: #f9fafb;
   --color-border: #e5e7eb;
 
-  --font-family-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: 'Roboto', ui-sans-serif, system-ui, sans-serif;
 
   --spacing-section-gap: 2.5rem;
   --spacing-item-gap: 1.25rem;
