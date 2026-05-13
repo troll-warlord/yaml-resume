@@ -19,6 +19,11 @@ function fmt(str: string): string {
   return parseDate(str).toLocaleDateString(props.dateLocale ?? 'en-US', { month: 'short', year: 'numeric' })
 }
 
+function fmtAts(str: string): string {
+  const [year, month] = str.split('-').map(Number)
+  return `${year}-${String(month ?? 1).padStart(2, '0')}`
+}
+
 function duration(start: string, end: string | null | undefined): string {
   const s = parseDate(start)
   const e = end ? parseDate(end) : new Date()
@@ -33,16 +38,19 @@ function duration(start: string, end: string | null | undefined): string {
 
 const displayStart = computed(() => fmt(props.startDate))
 const displayEnd = computed(() => (props.current ? 'Present' : props.endDate ? fmt(props.endDate) : 'Present'))
+const displayStartAts = computed(() => fmtAts(props.startDate))
+const displayEndAts = computed(() => (props.current ? 'Present' : props.endDate ? fmtAts(props.endDate) : 'Present'))
 const displayDuration = computed(() => duration(props.startDate, props.current ? null : props.endDate))
 </script>
 
 <template>
   <span class="inline-flex items-center gap-1.5 text-sm text-text-muted">
-    <ResumeIcon name="calendar" :size="13" />
-    <span>{{ displayStart }} – {{ displayEnd }}</span>
+    <ResumeIcon name="calendar" :size="13" class="print:hidden" />
+    <span class="print:hidden">{{ displayStart }} - {{ displayEnd }}</span>
+    <span class="hidden print:inline">{{ displayStartAts }} to {{ displayEndAts }}</span>
     <template v-if="showDuration">
-      <span class="text-border">·</span>
-      <span class="font-medium">{{ displayDuration }}</span>
+      <span class="text-border print:hidden">·</span>
+      <span class="font-medium print:hidden">{{ displayDuration }}</span>
     </template>
   </span>
 </template>

@@ -22,10 +22,10 @@ onMounted(() => {
 })
 
 useHead({
-  title: `${basics.name} – ${basics.label}`,
+  title: `${basics.name} - ${basics.label}`,
   meta: [
     { name: 'description', content: basics.summary },
-    { property: 'og:title', content: `${basics.name} – ${basics.label}` },
+    { property: 'og:title', content: `${basics.name} - ${basics.label}` },
     { property: 'og:description', content: basics.summary },
   ],
   style: [{ innerHTML: `@page { size: ${config?.pageSize ?? 'A4'} portrait; }` }],
@@ -49,6 +49,7 @@ useHead({
             <ContactItem reverse icon="mail" :label="basics.email" :href="`mailto:${basics.email}`" />
             <ContactItem reverse icon="phone" :label="basics.phone" :href="`tel:${basics.phone}`" />
             <ContactItem reverse icon="map-pin" :label="`${basics.location.city}, ${basics.location.country}`" />
+            <div class="mt-2 h-px w-full bg-border" role="separator" aria-hidden="true" />
             <ContactItem
               v-for="link in basics.social"
               :key="link.network"
@@ -60,8 +61,6 @@ useHead({
             />
           </div>
         </div>
-
-        <div class="mt-6 h-px w-full bg-border" role="separator" aria-hidden="true" />
       </header>
 
       <main>

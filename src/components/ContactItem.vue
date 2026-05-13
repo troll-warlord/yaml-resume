@@ -21,9 +21,10 @@ withDefaults(
       :href="href"
       :target="external ? '_blank' : undefined"
       :rel="external ? 'noopener noreferrer' : undefined"
-      class="text-text-muted hover:text-primary transition-colors"
+      class="inline-flex items-center gap-1 text-text-muted hover:text-primary transition-colors"
     >
-      {{ label }}
+      <span>{{ label }}</span>
+      <ResumeIcon v-if="external" name="external-link" :size="12" class="mt-0.5" />
     </a>
     <span v-else>{{ label }}</span>
   </div>

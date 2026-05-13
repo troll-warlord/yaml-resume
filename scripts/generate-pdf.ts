@@ -28,7 +28,7 @@ function extractKeywords(data: ResumeYaml): string {
 
 async function injectMetadata(pdfBytes: Uint8Array, data: ResumeYaml): Promise<Uint8Array> {
   const doc = await PDFDocument.load(pdfBytes)
-  doc.setTitle(`${data.basics.name} – ${data.basics.label}`)
+  doc.setTitle(`${data.basics.name} - ${data.basics.label}`)
   doc.setAuthor(data.basics.name)
   doc.setSubject(data.basics.label)
   doc.setKeywords([extractKeywords(data)])

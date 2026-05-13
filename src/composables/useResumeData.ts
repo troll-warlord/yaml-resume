@@ -1,4 +1,4 @@
-// @ts-expect-error – vite-plugin-yaml has no type declarations for *.yaml imports
+// @ts-expect-error - vite-plugin-yaml has no type declarations for *.yaml imports
 import rawData from '../../resume.yaml'
 import type { ResumeData } from '@/types/resume'
 
