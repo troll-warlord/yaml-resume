@@ -64,9 +64,9 @@ defineProps<{
         </template>
       </div>
 
-      <ul v-if="bullets?.length" class="mt-2 flex flex-col gap-1">
+      <ul v-if="bullets?.length" class="mt-2 flex flex-col gap-2">
         <li v-for="bullet in bullets" :key="bullet" class="flex gap-2 text-sm text-text-muted">
-          <span class="text-primary mt-0.5 shrink-0">{{ bulletMarker ?? '>' }}</span>
+          <span class="text-primary mr-1 shrink-0">{{ bulletMarker ?? '>' }}</span>
           <span>{{ bullet }}</span>
         </li>
       </ul>
