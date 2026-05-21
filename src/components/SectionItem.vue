@@ -53,10 +53,9 @@ defineProps<{
         />
       </div>
 
-      <div v-if="subtitle" class="flex flex-wrap items-center gap-x-3 gap-y-0.5">
+      <div v-if="subtitle" class="flex flex-wrap justify-between gap-x-3 gap-y-0.5">
         <span class="text-sm font-medium italic text-text-muted">{{ subtitle }}</span>
         <template v-if="location && (showLocation ?? true)">
-          <span class="text-text-muted text-sm hidden sm:inline">·</span>
           <span class="flex items-center gap-1 text-sm text-text-muted">
             <ResumeIcon name="map-pin" :size="11" />
             {{ location }}
