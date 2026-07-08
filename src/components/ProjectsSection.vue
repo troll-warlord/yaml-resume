@@ -1,22 +1,12 @@
 <script setup lang="ts">
-import { computed } from 'vue'
 import type { ResumeSection, ProjectItem } from '@/types/resume'
-import { useResumeData } from '@/composables/useResumeData'
+import { useTagSeparator } from '@/composables/useTagSeparator'
 import SectionHeader from './SectionHeader.vue'
 import SectionItem from './SectionItem.vue'
 
 defineProps<{ section: ResumeSection }>()
 
-const { config } = useResumeData()
-
-const tagStyle = computed(() => config?.tagStyle ?? 'dot')
-
-const separator = computed(() => {
-  if (tagStyle.value === 'dot') return ' · '
-  if (tagStyle.value === 'slash') return ' / '
-  if (tagStyle.value === 'comma') return ', '
-  return null
-})
+const { separator } = useTagSeparator()
 
 function asProjects(items: ResumeSection['items']): ProjectItem[] {
   return (items ?? []) as ProjectItem[]

@@ -11,19 +11,21 @@ const YAML_PATH = resolve(process.cwd(), 'resume.yaml')
 
 interface ResumeYaml {
   basics: { name: string; label: string; summary?: string }
+  config?: { pageSize?: string }
+  atsKeywords?: string[]
   sections?: Array<{ type: string; items?: Array<{ tags?: string[] }> }>
 }
 
-function extractKeywords(data: ResumeYaml): string {
+function extractKeywords(data: ResumeYaml): string[] {
   const tags: string[] = []
   for (const section of data.sections ?? []) {
-    if (section.type === 'grid') {
+    if (section.type === 'skills' || section.type === 'projects') {
       for (const item of section.items ?? []) {
         if (item.tags) tags.push(...item.tags)
       }
     }
   }
-  return [...new Set(tags)].join(', ')
+  return [...new Set([...tags, ...(data.atsKeywords ?? [])])]
 }
 
 async function injectMetadata(pdfBytes: Uint8Array, data: ResumeYaml): Promise<Uint8Array> {
@@ -31,7 +33,7 @@ async function injectMetadata(pdfBytes: Uint8Array, data: ResumeYaml): Promise<U
   doc.setTitle(`${data.basics.name} - ${data.basics.label}`)
   doc.setAuthor(data.basics.name)
   doc.setSubject(data.basics.label)
-  doc.setKeywords([extractKeywords(data)])
+  doc.setKeywords(extractKeywords(data))
   doc.setCreator('yaml-resume')
   doc.setProducer('yaml-resume + Playwright')
   doc.setCreationDate(new Date())
@@ -78,6 +80,8 @@ async function generatePdf() {
       await waitForServer(SITE_URL)
     }
 
+    const resumeData = yaml.load(readFileSync(YAML_PATH, 'utf8')) as ResumeYaml
+
     console.log(`Generating PDF from ${SITE_URL} …`)
     const browser = await chromium.launch()
     const page = await browser.newPage()
@@ -87,7 +91,7 @@ async function generatePdf() {
     await page.waitForFunction('document.fonts.ready')
 
     const pdfBytes = await page.pdf({
-      format: 'A4',
+      format: (resumeData.config?.pageSize as 'A4' | 'Letter') ?? 'A4',
       printBackground: true,
       scale: 1,
       margin: { top: '0', bottom: '0', left: '0', right: '0' },
@@ -96,7 +100,6 @@ async function generatePdf() {
 
     await browser.close()
 
-    const resumeData = yaml.load(readFileSync(YAML_PATH, 'utf8')) as ResumeYaml
     const finalBytes = await injectMetadata(pdfBytes, resumeData)
     writeFileSync(OUT_PATH, finalBytes)
 

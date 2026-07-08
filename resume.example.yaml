@@ -35,7 +35,6 @@ config:
   tagStyle: 'dot'
 
 sections:
-
   - id: summary
     title: About Me
     type: text
@@ -141,3 +140,12 @@ sections:
         url: https://github.com/you/yaml-resume
         description: YAML-driven resume website with PDF export — the very site you are reading
         tags: [Vue 3, Vite, Tailwind, YAML, PDF]
+
+atsKeywords:
+  - Full-Stack Engineer
+  - Vue.js
+  - Nuxt
+  - Node.js
+  - Kubernetes
+  - AWS
+  - Open Source

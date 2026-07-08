@@ -37,7 +37,7 @@ defineProps<{
             target="_blank"
             rel="noopener noreferrer"
             class="text-text-muted hover:text-primary mt-0.5"
-            aria-label="Open link"
+            :aria-label="`Open ${title} link`"
           >
             <ResumeIcon name="external-link" :size="12" />
           </a>

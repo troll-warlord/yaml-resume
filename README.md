@@ -8,7 +8,7 @@ Write your resume in a single YAML file. Get a clean, web-hosted resume and a pr
 
 ## Quick Start
 
-**Prerequisites:** Node.js 18+
+**Prerequisites:** Node.js 22+
 
 ```bash
 # 1. Clone the repo
@@ -87,12 +87,12 @@ Controls how the resume looks and behaves. All fields are optional — defaults 
 
 ```yaml
 config:
-  showDuration: false       # Show "3 yrs 2 mos" next to dates
-  showLocation: true        # Show city/location on timeline entries
-  bulletMarker: '>'         # Bullet prefix character — try '-', '•', '›'
-  dateLocale: 'en-US'       # Date format locale — e.g. 'en-GB' for UK dates
-  accentColor: '#2563eb'    # Primary colour — drives icons, borders, links
-  pageSize: 'A4'            # PDF page size — 'A4' or 'Letter'
+  showDuration: false # Show "3 yrs 2 mos" next to dates
+  showLocation: true # Show city/location on timeline entries
+  bulletMarker: '>' # Bullet prefix character — try '-', '•', '›'
+  dateLocale: 'en-US' # Date format locale — e.g. 'en-GB' for UK dates
+  accentColor: '#2563eb' # Primary colour — drives icons, borders, links
+  pageSize: 'A4' # PDF page size — 'A4' or 'Letter'
 ```
 
 ---
@@ -131,45 +131,45 @@ An ordered list of sections. Each section needs an `id`, `title`, and `type`.
 
 ---
 
-#### `timeline` — work experience, education, certifications
+#### `experience` — work experience, education, certifications
 
 ```yaml
 - id: experience
   title: Experience
-  type: timeline
+  type: experience
   items:
     - designation: Senior Engineer
       organization: Acme Corp
-      location: San Francisco, CA       # optional
-      startDate: '2021-03'              # YYYY-MM format
-      endDate: null                     # null = present
+      location: San Francisco, CA # optional
+      startDate: '2021-03' # YYYY-MM format
+      endDate: null # null = present
       current: true
-      bullets:                          # optional
+      bullets: # optional
         - Led migration to microservices
         - Mentored a team of 5 engineers
 ```
 
 **Optional flags on the section:**
 
-| Flag | Effect |
-| ------ | -------- |
+| Flag                  | Effect                                                                                                                     |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `flipHierarchy: true` | Swaps organisation and designation — useful for certifications where the cert name is more important than the issuing body |
-| `breakInside: true` | Prevents this section from splitting across PDF pages — recommended for short sections like Education and Certifications |
+| `breakInside: true`   | Prevents this section from splitting across PDF pages — recommended for short sections like Education and Certifications   |
 
 **Optional fields on each item:**
 
-| Field | Effect |
-| ------- | -------- |
-| `url` | Adds an external-link icon next to the heading — useful for credential links |
-| `location` | Shows a map-pin with the city |
-| `bullets` | List of achievement bullet points |
+| Field      | Effect                                                                       |
+| ---------- | ---------------------------------------------------------------------------- |
+| `url`      | Adds an external-link icon next to the heading — useful for credential links |
+| `location` | Shows a map-pin with the city                                                |
+| `bullets`  | List of achievement bullet points                                            |
 
 **Certifications example** (using `flipHierarchy` and `url`):
 
 ```yaml
 - id: certifications
   title: Certifications
-  type: timeline
+  type: experience
   flipHierarchy: true
   breakInside: true
   items:
@@ -183,14 +183,12 @@ An ordered list of sections. Each section needs an `id`, `title`, and `type`.
 
 ---
 
-#### `grid` — skills or projects
-
-**Skills:**
+#### `skills` — skill groups with tags
 
 ```yaml
 - id: skills
   title: Skills
-  type: grid
+  type: skills
   items:
     - group: Languages
       tags: [TypeScript, Python, Go]
@@ -198,12 +196,12 @@ An ordered list of sections. Each section needs an `id`, `title`, and `type`.
       tags: [Vue 3, React, Tailwind CSS]
 ```
 
-**Projects:**
+#### `projects` - project showcases
 
 ```yaml
 - id: projects
   title: Projects
-  type: grid
+  type: projects
   items:
     - title: My Project
       url: https://github.com/you/project
@@ -211,18 +209,35 @@ An ordered list of sections. Each section needs an `id`, `title`, and `type`.
       tags: [Vue, Vite, Open Source]
 ```
 
-The section automatically renders as skills (label + tag badges) when items have a `group` key, and as projects (title + description + tags) when items have a `title` key.
+---
+
+### `atsKeywords`
+
+An optional list of keywords embedded in the PDF for ATS (Applicant Tracking System) scanners. They are **invisible to human readers** but present in both the PDF content stream and the PDF `Keywords` metadata field - so ATS tools that extract text from PDFs will index them.
+
+Use this to list every skill, tool, or technology you want indexed without cluttering the visual `skills` section
+
+```yaml
+atsKeywords:
+  - TypeScript
+  - Node.js
+  - PostgreSQL
+  - Docker
+  - Kubernetes
+  - REST API
+  - CI/CD
+```
 
 ---
 
 ## All Commands
 
-| Command | What it does |
-| --------- | ------------- |
-| `npm run dev` | Start local dev server with hot reload |
-| `npm run build` | Type-check and build for production |
-| `npm run preview` | Serve the production build locally |
-| `npm run pdf` | Generate `resume.pdf` from the production build |
-| `npm run format` | Auto-format all source files with Prettier |
-| `npm run lint` | Check for lint errors |
-| `npm run lint:fix` | Auto-fix lint errors |
+| Command            | What it does                                    |
+| ------------------ | ----------------------------------------------- |
+| `npm run dev`      | Start local dev server with hot reload          |
+| `npm run build`    | Type-check and build for production             |
+| `npm run preview`  | Serve the production build locally              |
+| `npm run pdf`      | Generate `resume.pdf` from the production build |
+| `npm run format`   | Auto-format all source files with Prettier      |
+| `npm run lint`     | Check for lint errors                           |
+| `npm run lint:fix` | Auto-fix lint errors                            |

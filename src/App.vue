@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { computed, onMounted } from 'vue'
 import { useHead } from '@unhead/vue'
 import { sectionRegistry } from '@/utils/sectionRegistry'
 import { useResumeData } from '@/composables/useResumeData'
@@ -11,6 +11,10 @@ const { basics, sections, config } = resume
 function downloadPdf() {
   window.print()
 }
+
+const cardStyle = computed(() =>
+  config?.pageSize === 'Letter' ? { width: '215.9mm', minHeight: '279.4mm', maxWidth: '215.9mm' } : {},
+)
 
 onMounted(() => {
   if (config?.accentColor) {
@@ -36,7 +40,7 @@ useHead({
   <!-- Page shell — grey on screen, transparent in print -->
   <div class="min-h-screen bg-gray-100 py-8 px-4 print:bg-transparent print:p-0 print:m-0">
     <!-- A4 card -->
-    <div id="resume" class="a4-card bg-background mx-auto px-8 py-8 text-text-main">
+    <div id="resume" class="a4-card bg-background mx-auto px-8 py-8 text-text-main" :style="cardStyle">
       <header class="mb-section-gap">
         <div class="flex items-start justify-between gap-6">
           <div>
@@ -68,6 +72,14 @@ useHead({
           <component :is="sectionRegistry[section.type]" :section="section" />
         </div>
       </main>
+
+      <div
+        v-if="resume.atsKeywords?.length"
+        class="hidden print:block text-transparent text-xs select-none"
+        aria-hidden="true"
+      >
+        Skills: {{ resume.atsKeywords?.join(' ') }}
+      </div>
     </div>
 
     <!-- Download button — hidden in print -->

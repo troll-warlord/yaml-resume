@@ -76,9 +76,5 @@ export interface ResumeData {
   basics: Basics
   sections: ResumeSection[]
   config?: ResumeConfig
-}
-
-export interface ResumeData {
-  basics: Basics
-  sections: ResumeSection[]
+  atsKeywords?: string[]
 }
